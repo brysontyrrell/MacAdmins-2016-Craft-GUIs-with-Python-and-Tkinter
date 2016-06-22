@@ -5,17 +5,18 @@ import subprocess
 class App(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        self.pack()
         self.master.title("Hello World")
         self.master.resizable(False, False)
         self.master.tk_setPalette(background='#ececec')  # '#ececec' is the standard gray background of El Capitain
 
-        menubar = tk.Menu(self.master)
-        self.master.config(menu=menubar)
+        x = (self.master.winfo_screenwidth() - self.master.winfo_reqwidth()) / 2
+        y = (self.master.winfo_screenheight() - self.master.winfo_reqheight()) / 3
+        self.master.geometry("+{}+{}".format(x, y))
 
-        text = tk.Label(self, text="This is your first GUI. (highfive)")
-        text.pack()
+        self.master.config(menu=tk.Menu(self))
 
-        self.pack()
+        tk.Label(self, text="This is your first GUI. (highfive)").pack()
 
 
 if __name__ == '__main__':

@@ -5,22 +5,22 @@ import subprocess
 class App(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        self.pack()
         self.master.title("Hello World")
         self.master.resizable(False, False)
         self.master.tk_setPalette(background='#ececec')
 
-        menubar = tk.Menu(self.master)
-        self.master.config(menu=menubar)
+        x = (self.master.winfo_screenwidth() - self.master.winfo_reqwidth()) / 2
+        y = (self.master.winfo_screenheight() - self.master.winfo_reqheight()) / 3
+        self.master.geometry("+{}+{}".format(x, y))
 
-        text = tk.Label(self, text="This is your first GUI. (highfive)")
-        text.pack()
+        self.master.config(menu=tk.Menu(self.master))
 
-        ok = tk.Button(self, text='OK', default='active', command=self.click_ok)
-        cancel = tk.Button(self, text='Cancel', command=self.click_cancel)
-        ok.pack(side='right')
-        cancel.pack(side='right')
+        tk.Label(self, text="This is your first GUI. (highfive)").pack()
 
-        self.pack()
+        tk.Button(self, text='OK', default='active', command=self.click_ok).pack(side='right')
+
+        tk.Button(self, text='Cancel', command=self.click_cancel).pack(side='right')
 
     def click_ok(self):
         print("The user clicked 'OK'")

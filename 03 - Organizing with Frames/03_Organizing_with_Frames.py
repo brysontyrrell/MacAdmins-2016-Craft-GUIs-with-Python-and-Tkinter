@@ -5,26 +5,28 @@ import subprocess
 class App(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        self.pack()
         self.master.title("Hello World")
         self.master.resizable(False, False)
         self.master.tk_setPalette(background='#ececec')
 
-        menubar = tk.Menu(self.master)
-        self.master.config(menu=menubar)
+        x = (self.master.winfo_screenwidth() - self.master.winfo_reqwidth()) / 2
+        y = (self.master.winfo_screenheight() - self.master.winfo_reqheight()) / 3
+        self.master.geometry("+{}+{}".format(x, y))
 
-        dialog_frame = tk.Frame(self.master)
-        text = tk.Label(dialog_frame, text="This is your first GUI. (highfive)")
-        text.pack()
+        self.master.config(menu=tk.Menu(self.master))
+
+        dialog_frame = tk.Frame(self)
         dialog_frame.pack(padx=20, pady=15)
 
-        button_frame = tk.Frame(self.master)
-        ok = tk.Button(button_frame, text='OK', default='active', command=self.click_ok)
-        cancel = tk.Button(button_frame, text='Cancel', command=self.click_cancel)
-        ok.pack(side='right')
-        cancel.pack(side='right')
+        tk.Label(dialog_frame, text="This is your first GUI. (highfive)").pack()
+
+        button_frame = tk.Frame(self)
         button_frame.pack(padx=15, pady=(0, 15), anchor='e')
 
-        self.pack()
+        tk.Button(button_frame, text='OK', default='active', command=self.click_ok).pack(side='right')
+
+        tk.Button(button_frame, text='Cancel', command=self.click_cancel).pack(side='right')
 
     def click_ok(self):
         print("The user clicked 'OK'")
