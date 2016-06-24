@@ -1,4 +1,5 @@
 import Tkinter as tk
+import ttk
 
 
 class LabelApp(tk.Frame):
@@ -172,6 +173,44 @@ class OptionMenuApp(tk.Frame):
         self.master.configure(background=new_color)
 
 
+class ProgressBarApp(ttk.Frame):
+    def __init__(self, master):
+        ttk.Frame.__init__(self, master)
+        self.pack()
+
+        ttk.Label(self, text="This is an 'indeterminate' progress bar").pack(padx=20, pady=10)
+
+        progress1 = ttk.Progressbar(self, orient='horizontal', length=500, mode='indeterminate')
+        progress1.pack(padx=20, pady=10)
+
+        ttk.Label(self, text="This is a 'determinate' progress bar").pack(padx=20, pady=10)
+
+        progress2 = ttk.Progressbar(self, orient='horizontal', length=500, mode='determinate')
+        progress2.pack(padx=20, pady=10)
+
+        progress1.start()
+        progress2.start()
+
+
+class ComboboxApp(ttk.Frame):
+    def __init__(self, master):
+        ttk.Frame.__init__(self, master)
+        self.pack()
+
+        options = ['Minneapolis', 'Eau Claire', 'Cupertino', 'New York', 'Amsterdam', 'Sydney', 'Hong Kong']
+
+        ttk.Label(self, text="This is a combobox").pack(pady=10)
+
+        self.combo = ttk.Combobox(self, values=options, state='readonly')
+        self.combo.current(0)
+        self.combo.pack(padx=15)
+
+        ttk.Button(self, text='OK', command=self.ok).pack(side='right', padx=15, pady=10)
+
+    def ok(self):
+        print('Selection: {}'.format(self.combo.get()))
+
+
 if __name__ == '__main__':
     root = tk.Tk()
 
@@ -201,5 +240,11 @@ if __name__ == '__main__':
 
     top7 = tk.Toplevel(root)
     OptionMenuApp(top7)
+
+    top8 = tk.Toplevel(root)
+    ProgressBarApp(top8)
+
+    top9 = tk.Toplevel(root)
+    ComboboxApp(top9)
 
     root.mainloop()
