@@ -46,12 +46,12 @@ class EntryApp(tk.Frame):
 
         tk.Label(self, text="This is a normal text entry box").pack()
 
-        self.entry = tk.Entry(self)
+        self.entry = tk.Entry(self, bg='white')
         self.entry.pack()
 
         tk.Label(self, text="This is a secret text entry box for passwords").pack()
 
-        self.secret_entry = tk.Entry(self, show='*')
+        self.secret_entry = tk.Entry(self, show='*', bg='white')
         self.secret_entry.pack()
 
         tk.Button(self, text='OK', command=self.ok).pack()
@@ -69,7 +69,7 @@ class ListApp(tk.Frame):
 
         list_items = ["This is a listbox!", 'Item 1', 'Item 2', 'Item 3', 'etc.']
 
-        self.listbox = tk.Listbox(self, selectmode='extended')
+        self.listbox = tk.Listbox(self, selectmode='extended', bg='white')
         self.listbox.pack(padx=10, pady=10)
 
         for l in list_items:
@@ -211,6 +211,45 @@ class ComboboxApp(ttk.Frame):
         print('Selection: {}'.format(self.combo.get()))
 
 
+class Voltron(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.pack(padx=15, pady=15)
+        self.master.title("Voltron")
+        self.master.resizable(False, False)
+        self.master.tk_setPalette(background='#e6e6e6')
+
+        frame1 = tk.Frame(self)
+        frame1.grid(row=0, column=0, columnspan=2)
+
+        ProgressBarApp(frame1)
+
+        frame2 = tk.Frame(self)
+        frame2.grid(row=1, column=0)
+
+        EntryApp(frame2)
+
+        frame3 = tk.Frame(self)
+        frame3.grid(row=1, column=1)
+
+        ComboboxApp(frame3)
+
+        frame4 = tk.Frame(self)
+        frame4.grid(row=2, column=0, rowspan=2)
+
+        ListApp(frame4)
+
+        frame5 = tk.Frame(self)
+        frame5.grid(row=2, column=1)
+
+        OptionMenuApp(frame5)
+
+        frame6 = tk.Frame(self)
+        frame6.grid(row=3, column=1)
+
+        RadiobuttonApp(frame6)
+
+
 if __name__ == '__main__':
     root = tk.Tk()
 
@@ -246,5 +285,8 @@ if __name__ == '__main__':
 
     top9 = tk.Toplevel(root)
     ComboboxApp(top9)
+
+    top10 = tk.Toplevel(root)
+    Voltron(top10)
 
     root.mainloop()
