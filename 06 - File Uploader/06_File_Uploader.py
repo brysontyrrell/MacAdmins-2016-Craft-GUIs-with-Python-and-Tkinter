@@ -106,8 +106,6 @@ class LoadingFrame(tk.Frame):
         self.progress['value'] = 0
         self.progress['maximum'] = count
 
-        self.tkraise()
-
 
 if __name__ == '__main__':
     info = AppKit.NSBundle.mainBundle().infoDictionary()
