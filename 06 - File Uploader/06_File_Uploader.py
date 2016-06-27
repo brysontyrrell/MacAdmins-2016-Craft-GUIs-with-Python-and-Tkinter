@@ -9,7 +9,7 @@ import time
 class App(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        self.master.title("Hello World")
+        self.master.title("File Upload Assistant")
         self.master.resizable(False, False)
         self.master.tk_setPalette(background='#e6e6e6')
 
@@ -33,7 +33,8 @@ class App(tk.Frame):
         self.file_button = tk.Button(file_frame, text='Select file(s)...', command=self.file_picker, anchor='w')
         self.file_button.pack(side='left')
 
-        tk.Label(file_frame, textvariable=self.file_count, anchor='e').pack(side='right')
+        self.file_label = tk.Label(file_frame, textvariable=self.file_count, anchor='e')
+        self.file_label.pack(side='right')
 
         tk.Label(self, text="Add a comment:").pack(padx=15, pady=(15, 0), anchor='w')
 
@@ -88,7 +89,7 @@ class App(tk.Frame):
 
     def _toggle_state(self, state):
         state = state if state in ('normal', 'disabled') else 'normal'
-        widgets = (self.file_button, self.text, self.submit_button, self.cancel_button)
+        widgets = (self.file_button, self.file_label, self.text, self.submit_button, self.cancel_button)
         for widget in widgets:
             widget.configure(state=state)
 
