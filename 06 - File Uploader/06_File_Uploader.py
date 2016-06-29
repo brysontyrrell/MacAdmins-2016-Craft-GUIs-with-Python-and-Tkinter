@@ -1,6 +1,5 @@
 import Tkinter as tk
 import AppKit
-import subprocess
 import tkFileDialog
 import ttk
 import time
@@ -113,7 +112,7 @@ if __name__ == '__main__':
 
     root = tk.Tk()
     app = App(root)
-    subprocess.call(['/usr/bin/osascript', '-e', 'tell app "Finder" to set frontmost of process "Python" to true'])
+    AppKit.NSApplication.sharedApplication().activateIgnoringOtherApps_(True)
     app.mainloop()
 
 """
